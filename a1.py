@@ -1,8 +1,6 @@
 import numpy as np
 import sys
 
-#------------------------------------------------------------------------------------------------
-# --- Class PuzzleNode --- #
 
 class PuzzleNode():
     def __init__(self, state, parent, action, depth, step_cost, path_cost, heuristic_cost):
@@ -110,8 +108,9 @@ class PuzzleNode():
                 
             else:                
                 for direction in ['down', 'right', 'up', 'left']:
-                    if current_node.is_valid_move(direction):
-                        new_state, value = current_node.is_valid_move(direction)
+                    move_result = current_node.is_valid_move(direction)
+                    if move_result:
+                        new_state, value = move_result
                         if tuple(new_state.reshape(1, 9)[0]) not in visited:
                             stack.append(PuzzleNode(state=new_state,
                                                     parent=current_node,
@@ -148,8 +147,9 @@ class PuzzleNode():
             else:                
                 if current_node.depth < 10:
                     for direction in ['down', 'right', 'up', 'left']:
-                        if current_node.is_valid_move(direction):
-                            new_state, value = current_node.is_valid_move(direction)
+                        move_result = current_node.is_valid_move(direction)
+                        if move_result:
+                            new_state, value = move_result
                             if tuple(new_state.reshape(1, 9)[0]) not in visited:
                                 stack.append(PuzzleNode(state=new_state,
                                                         parent=current_node,
@@ -189,8 +189,9 @@ class PuzzleNode():
             else:     
                 if current_node.depth < 10:
                     for direction in ['down', 'right', 'up', 'left']:
-                        if current_node.is_valid_move(direction):
-                            new_state, value = current_node.is_valid_move(direction)
+                        move_result = current_node.is_valid_move(direction)
+                        if move_result:
+                            new_state, value = move_result
                             if tuple(new_state.reshape(1, 9)[0]) not in visited:
                                 path_cost = current_node.path_cost + value
                                 depth = current_node.depth + 1
@@ -228,9 +229,6 @@ class PuzzleNode():
         return sum_manhattan
 
 
-#--------------------------------------------------------------------------------------------
-# --- Driver --- #
-
 def main(argv):
     if len(sys.argv) == 2:
         algorithm_name = sys.argv[1]
@@ -265,8 +263,6 @@ def main(argv):
     else:
         print('Invalid algorithm name. Available names: dfs, ids, astar1, astar2')
 
-#--------------------------------------------------------------------------------------------
-# --- Main module --- #
 
 if __name__ == '__main__':
     main(sys.argv)
