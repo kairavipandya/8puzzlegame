@@ -23,13 +23,19 @@ The program will then output the sequence of board positions that solve the puzz
 
 ### Sample Input and Corresponding Output
 
-Input:
+**python3 a1.py astar1**
+
+**Enter the initial state of the puzzle (use space-separated values, e.g., '1 2 3 4 0 5 6 7 8'):**
+
+1 0 2 4 5 3 6 7 8
+
+**Input:**
 
 1 0 2
 4 5 3
 6 7 8
 
-Output:
+**Output:**
 
 [[1 0 2]
  [4 5 3]
